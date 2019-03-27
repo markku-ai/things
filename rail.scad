@@ -5,6 +5,7 @@ rail_length = 280;
 rail_end_margin = 10; // Distance from rail end to the first hole
 front_fastening_position = 24.5; // Distance from the beginning of the rail to the front fastening screw hole
 rear_fastening_position = 15; // Distance from the end of the rail to the rear fastening screw hole
+tolerance = 0.5;
 
 // Should not need configuration
 rail_bottom_width = 23;
@@ -12,8 +13,8 @@ rail_side_height = 6;
 rail_side_width = 4;
 rail_top_height = 4;
 rail_wall_thickness = 2;
-rail_slot_width = 3;
-rail_center_thickness = 5;
+rail_slot_width = 2 + tolerance * 2;
+rail_center_thickness = 6 - tolerance * 2;
 rail_slot_height = 6;
 total_height = rail_side_height + rail_top_height;
 chamfer_width = 1 + 1/3;
@@ -69,8 +70,8 @@ module railHole() {
 
 module railFasteningSlot() {
     union() {
-        translate([rail_side_width + rail_wall_thickness + rail_slot_width, 0, rail_slot_height]) {
-            cube(size = [rail_center_thickness, rail_fastening_slot_length, rail_slot_height]);
+        translate([rail_side_width + rail_wall_thickness + rail_slot_width, 0, rail_top_height]) {
+            cube(size = [rail_center_thickness, rail_fastening_slot_length, rail_slot_height ]);
             translate([rail_center_thickness / 2, rail_fastening_slot_length / 2, -total_height]) {
                 rotate([0, 0, 90]) {
                     cylinder(total_height,d=m3_thread_diameter);
@@ -97,11 +98,11 @@ difference() {
         }
     }
 
-    translate([0, front_fastening_position, 0]) {
+    translate([0, front_fastening_position - rail_fastening_slot_length / 2, 0]) {
         railFasteningSlot();
     }
 
-    translate([0, rail_length - rear_fastening_position - rail_fastening_slot_length, 0]) {
+    translate([0, rail_length - rear_fastening_position - rail_fastening_slot_length / 2, 0]) {
         railFasteningSlot();
     }
 }
