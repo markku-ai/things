@@ -105,4 +105,17 @@ difference() {
     translate([0, rail_length - rear_fastening_position - rail_fastening_slot_length / 2, 0]) {
         railFasteningSlot();
     }
+
+    linear_extrude(height=total_height) {
+        polygon([
+            [0,0],
+            [rail_side_width, 0],
+            [0, rail_side_width],
+        ]);
+        polygon([
+            [rail_bottom_width, 0],
+            [rail_bottom_width - rail_side_width, 0],
+            [rail_bottom_width, rail_side_width],
+        ]);
+    }
 }
