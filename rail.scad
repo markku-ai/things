@@ -27,7 +27,7 @@ rail_hole_top_margin = 1.25;
 
 m3_nut_diameter = 5.5;
 m3_thread_diameter = 3.5;
-m3_socket_diameter = 5;
+m3_socket_diameter = 6;
 
 module railEndProfile() {
     
@@ -61,7 +61,7 @@ module railHole() {
                 cylinder(rail_side_width, d=m3_socket_diameter);
                 cylinder(rail_bottom_width, d=m3_thread_diameter);
                 translate([0, 0, rail_bottom_width - rail_side_width]) {
-                    cylinder($fn=6, rail_side_width, d=m3_nut_diameter);
+                    cylinder($fn=6, rail_side_width, d=(m3_nut_diameter / 3) * sqrt(3) * 2);
                 }
             }
         }
