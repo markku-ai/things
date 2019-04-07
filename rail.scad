@@ -21,17 +21,20 @@ hole_top_tolerance = 0; // [0:0.05:1.25]
 /* [Hidden] */
 
 $fn=16;
-rail_bottom_width = 23;
-rail_side_height = 6;
-rail_side_width = 4.5 - gap_tolerance;
-rail_top_height = 4;
-rail_wall_thickness = 2;
-rail_slot_width = 2 + gap_tolerance * 2;
-rail_center_thickness = 6 - gap_tolerance * 2;
-rail_slot_height = 6;
-total_height = rail_side_height + rail_top_height;
+
+top_height = 4;
+slot_height = 6;
+side_height = 6;
+total_height = side_height + top_height;
+
+total_width = 23;
+slot_width = 2 + gap_tolerance * 2;
+side_width = 4.5 - gap_tolerance;
 chamfer_width = 1 + 1/3;
 chamfer_height = 4;
+
+wall_thickness = 2;
+center_thickness = 6 - gap_tolerance * 2;
 
 fastening_slot_length = 5.5;
 
@@ -42,22 +45,22 @@ module profile() {
     polygon([
         [0, 0],
         [0, chamfer_height],
-        [chamfer_width, rail_side_height],
-        [rail_side_width, rail_side_height],
-        [rail_side_width, rail_side_height + rail_top_height],
-        [rail_side_width + rail_wall_thickness, total_height],
-        [rail_side_width + rail_wall_thickness, total_height - rail_slot_height],
-        [rail_side_width + rail_wall_thickness + rail_slot_width, total_height - rail_slot_height],
-        [rail_side_width + rail_wall_thickness + rail_slot_width, total_height],
-        [rail_side_width + rail_wall_thickness + rail_slot_width + rail_center_thickness, total_height],
-        [rail_side_width + rail_wall_thickness + rail_slot_width + rail_center_thickness, total_height - rail_slot_height],
-        [rail_side_width + rail_wall_thickness + 2 * rail_slot_width + rail_center_thickness, total_height - rail_slot_height],
-        [rail_side_width + rail_wall_thickness + 2 * rail_slot_width + rail_center_thickness, total_height],
-        [rail_side_width + 2 * rail_wall_thickness + 2 * rail_slot_width + rail_center_thickness, total_height],
-        [rail_bottom_width - rail_side_width, rail_side_height],
-        [rail_bottom_width - chamfer_width, rail_side_height],
-        [rail_bottom_width, chamfer_height],
-        [rail_bottom_width, 0]
+        [chamfer_width, side_height],
+        [side_width, side_height],
+        [side_width, side_height + top_height],
+        [side_width + wall_thickness, total_height],
+        [side_width + wall_thickness, total_height - slot_height],
+        [side_width + wall_thickness + slot_width, total_height - slot_height],
+        [side_width + wall_thickness + slot_width, total_height],
+        [side_width + wall_thickness + slot_width + center_thickness, total_height],
+        [side_width + wall_thickness + slot_width + center_thickness, total_height - slot_height],
+        [side_width + wall_thickness + 2 * slot_width + center_thickness, total_height - slot_height],
+        [side_width + wall_thickness + 2 * slot_width + center_thickness, total_height],
+        [side_width + 2 * wall_thickness + 2 * slot_width + center_thickness, total_height],
+        [total_width - side_width, side_height],
+        [total_width - chamfer_width, side_height],
+        [total_width, chamfer_height],
+        [total_width, 0]
     ]);     
 }
 
@@ -81,9 +84,9 @@ module railBoltHole() {
 
 module fasteningSlot() {
     union() {
-        translate([rail_side_width + rail_wall_thickness + rail_slot_width, 0, rail_top_height]) {
-            cube(size = [rail_center_thickness, fastening_slot_length, rail_slot_height ]);
-            translate([rail_center_thickness / 2, fastening_slot_length / 2, -total_height]) {
+        translate([side_width + wall_thickness + slot_width, 0, top_height]) {
+            cube(size = [center_thickness, fastening_slot_length, slot_height ]);
+            translate([center_thickness / 2, fastening_slot_length / 2, -total_height]) {
                 rotate([0, 0, 90]) {
                     boltHole(size=3, length=total_height);
                 }
@@ -103,7 +106,7 @@ difference() {
     
     translate([0, hole_end_margin, 0]){
         for(i = [0: hole_distance: length - 2 * hole_end_margin]) {
-            translate([0, i, total_height - rail_slot_height / 2 + hole_top_tolerance]) {
+            translate([0, i, total_height - slot_height / 2 + hole_top_tolerance]) {
                 railBoltHole();
             }
         }
@@ -120,13 +123,13 @@ difference() {
     linear_extrude(height=total_height) {
         polygon([
             [0,0],
-            [rail_side_width, 0],
-            [0, rail_side_width],
+            [side_width, 0],
+            [0, side_width],
         ]);
         polygon([
-            [rail_bottom_width, 0],
-            [rail_bottom_width - rail_side_width, 0],
-            [rail_bottom_width, rail_side_width],
+            [total_width, 0],
+            [total_width - side_width, 0],
+            [total_width, side_width],
         ]);
     }
 }
