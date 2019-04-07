@@ -1,3 +1,5 @@
+use <MCAD/nuts_and_bolts.scad>
+
 // Length of the rail
 length = 240;
 
@@ -36,10 +38,6 @@ fastening_slot_length = 5.5;
 hole_distance = 10;
 rail_hole_top_margin = 1.25;
 
-m3_nut_diameter = 5.5;
-m3_thread_diameter = 3.5;
-m3_socket_diameter = 6;
-
 module profile() {
     polygon([
         [0, 0],
@@ -63,14 +61,18 @@ module profile() {
     ]);     
 }
 
-module boltHole() {
+module railBoltHole() {
     rotate([90, 0, 0]) {
         rotate([0, 90, 0]) {
             union() {
-                cylinder(rail_side_width, d=m3_socket_diameter);
-                cylinder(rail_bottom_width, d=m3_thread_diameter);
-                translate([0, 0, rail_bottom_width - rail_side_width]) {
-                    cylinder($fn=6, rail_side_width, d=(m3_nut_diameter / 3) * sqrt(3) * 2);
+                cylinder(side_width, d=6);
+                linear_extrude(height=total_width) {
+                    boltHole(size=3, length=total_width, tolerance=0.25, proj=1);
+                }
+                translate([0, 0, total_width - side_width]) {
+                    linear_extrude(height=side_width) {
+                        nutHole(size=3, proj=1);
+                    }
                 }
             }
         }
@@ -83,7 +85,7 @@ module fasteningSlot() {
             cube(size = [rail_center_thickness, fastening_slot_length, rail_slot_height ]);
             translate([rail_center_thickness / 2, fastening_slot_length / 2, -total_height]) {
                 rotate([0, 0, 90]) {
-                    cylinder(total_height,d=m3_thread_diameter);
+                    boltHole(size=3, length=total_height);
                 }
             }
         }
@@ -102,7 +104,7 @@ difference() {
     translate([0, hole_end_margin, 0]){
         for(i = [0: hole_distance: length - 2 * hole_end_margin]) {
             translate([0, i, total_height - rail_slot_height / 2 + hole_top_tolerance]) {
-                boltHole();
+                railBoltHole();
             }
         }
     }
