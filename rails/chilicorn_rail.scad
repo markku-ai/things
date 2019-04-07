@@ -36,7 +36,7 @@ chamfer_height = 4;
 wall_thickness = 2;
 center_thickness = 6 - gap_tolerance * 2;
 
-fastening_slot_length = 5.5;
+fastening_slot_length = 5.2;
 
 hole_distance = 10;
 rail_hole_top_margin = 1.25;
@@ -120,6 +120,7 @@ difference() {
         fasteningSlot();
     }
 
+    // Chamfer to indicate front of the rail
     linear_extrude(height=total_height) {
         polygon([
             [0,0],
