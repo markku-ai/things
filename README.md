@@ -2,6 +2,15 @@
 
 3D-printable models for DIY robocars
 
+## /rails
+The parametrizable Chilicorn Rail and presets to different cars. You can create your own rail with [Thingiverse's Customizer](https://www.thingiverse.com/apps/customizer/run?thing_id=3547294)
+
+## /adapters
+Adapters which connects the rail to the car
+
+## /modules
+Mount different kinds of accessories to the rail 
+
 ## /body
 Case for hiding the electronics and ensuring good enough aerodynamics.
 
