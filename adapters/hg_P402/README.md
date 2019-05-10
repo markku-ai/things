@@ -9,7 +9,8 @@ Some [photos](https://paper.dropbox.com/doc/My-Donkey-Car--Ac11JXE~WHWdRJpyo6ldo
 ### rail_adapters_hgP405
 You need to use the standard Rail from markku.
 Adapters I designed have 52 mm distance between vertical plot of my crawler HG P402 and is plug & screw with Markku rail.
-[adapters](https://paper.dropbox.com/ep/redirect/image?url=https%3A%2F%2Fpaper-attachments.dropbox.com%2Fs_496161E705E19F08964EF3C67F80D3D68993D67E2B303504BA379E6FA2D900E4_1557466916893_IMG_7023.jpg&hmac=drb0OjquJEJsGmMl2j%2BIskWGVE5btXEedrZmfYUyzdQ%3D&width=484)
+
+
 
 ### RPLidar_slamtec
 a baseplate for slamtec A1: 
