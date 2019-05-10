@@ -13,13 +13,13 @@ Adapters I designed have 52 mm distance between vertical plot of my crawler HG P
 
 
 ### RPLidar_slamtec
-a baseplate for slamtec A1 
-[Example shop robocarstore](https://www.robocarstore.com/products/slamtec-rplidar-a1)
+a baseplate for slamtec A1: 
+[example shop robocarstore](https://www.robocarstore.com/products/slamtec-rplidar-a1)
 
 
 
 ### wifi_8266_nodeMCU
-a tiny baseplate for Lolin nodeMcu v3 
+a tiny baseplate for Lolin nodeMcu v3: 
 [example on amazon](https://www.amazon.fr/gp/product/B07K24YQZQ)
 
 
